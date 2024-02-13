@@ -3,7 +3,7 @@ namespace OpenClosePrinciple {
 	interface OrderProcessorInterface {
 		confirm(): void;
 	}
-	class OrderProcessor implements OrderProcessorInterface{
+	class OrderProcessor implements OrderProcessorInterface {
 		protected orderItems: OrderType;
 
 		constructor(orderItems: OrderType) {
