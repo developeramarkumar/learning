@@ -3,10 +3,12 @@ namespace InterfaceSegregation {
     interface OrderInfo {
         orderDetails(orderId: OrderIdType): void
     }
+
     interface OrderStatus {
         orderStatus(orderId: OrderIdType): void
         changeStatus(orderId: OrderIdType): void
     }
+
     interface ProcessOrder {
         processForDelivery(orderId: OrderIdType): void
     }
@@ -23,12 +25,13 @@ namespace InterfaceSegregation {
         changeStatus(orderId: OrderIdType): void {
             console.log(' change order status for orderId : ' + orderId)
         }
-        
+
         processForDelivery(orderId: OrderIdType): void {
             console.log('process order for delivery for orderId : ' + orderId)
         }
 
     }
+    
     const order = new Order();
     order.orderDetails(1);
     order.orderStatus(1);
