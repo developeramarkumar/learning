@@ -2,3 +2,5 @@ node_modules
 dist
 data
 tsconfig.json
+package-lock.json
+package.json

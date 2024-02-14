@@ -2,10 +2,8 @@ namespace SingleResponsibility {
 	type EmployeeId = number;
 
 	class Employee {
-		constructor(private employeeId: EmployeeId) { }
-
-		info(): void {
-			console.log('Employee Info for empID :', this.employeeId);
+		info(employeeId: EmployeeId): void {
+			console.log('Employee Info for empID :', employeeId);
 		}
 	}
 
@@ -21,12 +19,12 @@ namespace SingleResponsibility {
 		}
 	}
 
-	const orderProcessor = new Employee(1);
-	orderProcessor.info();
+	const employee = new Employee();
+	employee.info(1);
 
-	const deliveryOrder = new EmployeeWork();
-	deliveryOrder.dailyWorkLog(1);
+	const employeeWork = new EmployeeWork();
+	employeeWork.dailyWorkLog(1);
 
-	const invoiceGenerator = new EmployeeGrowth();
-	invoiceGenerator.progressReport(1);
+	const employeeGrowth = new EmployeeGrowth();
+	employeeGrowth.progressReport(1);
 }
