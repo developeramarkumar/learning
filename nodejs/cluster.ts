@@ -3,7 +3,6 @@ const os = require('os');
 const http = require('http');
 
 const cpus = os.cpus();
-
 function test(pid: any) {
     console.log('child process started for pid :' + pid)
 }
@@ -15,7 +14,7 @@ if (cluster.isMaster) {
         cluster.fork()
     }
     cluster.on('exit', (worker: any) => {
-        console.log(worker.process.pid);
+        console.log('existed process id : ' + worker.process.pid);
         cluster.fork();
     });
 } else {

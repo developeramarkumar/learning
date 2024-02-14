@@ -16,7 +16,4 @@ namespace WorkerThread {
     console.log('main worker count  of loop is :' + j)
     console.timeEnd('mainWorkerTime');
 
-
-
-
 }
