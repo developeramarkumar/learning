@@ -3,10 +3,6 @@ const os = require('os');
 const http = require('http');
 
 const cpus = os.cpus();
-function test(pid: any) {
-    console.log('child process started for pid :' + pid)
-}
-
 
 if (cluster.isMaster) {
     console.log(`Master process ${process.pid} is running`);
@@ -18,5 +14,17 @@ if (cluster.isMaster) {
         cluster.fork();
     });
 } else {
-    test(process.pid)
+    const server = http.createServer((req: any, res: any) => {
+        if (req.url == '/home') {
+            res.writeHead(200);
+            res.end('Hello from worker ' + cluster.worker.id);
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Page not found');
+        }
+    });
+
+    server.listen(3000, () => {
+        console.log(`Worker ${cluster.worker.id} is listening on port 3000`);
+    });
 }
