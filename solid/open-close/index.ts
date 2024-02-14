@@ -1,37 +1,30 @@
 namespace OpenClosePrinciple {
-	type OrderType = number[];
-	interface OrderProcessorInterface {
-		confirm(): void;
-	}
-	class OrderProcessor implements OrderProcessorInterface {
-		protected orderItems: OrderType;
+	type EmployeeType = number;
 
-		constructor(orderItems: OrderType) {
-			this.orderItems = orderItems;
-		}
-
-		confirm(): void {
-			console.log('Order confirmed for :', this.orderItems);
-		}
-
-		addMoreOrder(orderId: number): void {
-			this.orderItems.push(orderId);
-			console.log('New order added for :', orderId);
-		}
+	interface EmployeeInterface {
+		detail(): void;
 	}
 
-	class OrderProcessorWithInvoice extends OrderProcessor {
+	class Employee implements EmployeeInterface {
 
-		generateInvoice(): void {
-			console.log('Order invoice generated for :', this.orderItems);
+		constructor(protected employeeId: EmployeeType) { }
+
+		detail(): void {
+			console.log('Employee detail for empId :', this.employeeId);
 		}
 
 	}
 
-	const orderItems = [1, 2, 3];
+	class EmployeeWork extends Employee {
 
-	const orderProcessor = new OrderProcessorWithInvoice(orderItems);
-	orderProcessor.addMoreOrder(4)
-	orderProcessor.confirm();
-	orderProcessor.generateInvoice();
+		logWork(h: number): void {
+			console.log('log work for empID :', this.employeeId);
+		}
+
+	}
+
+
+	const employeeWork = new EmployeeWork(1);
+	employeeWork.detail()
+	employeeWork.logWork(8);
 }

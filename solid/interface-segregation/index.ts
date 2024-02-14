@@ -1,41 +1,49 @@
 namespace InterfaceSegregation {
-    type OrderIdType = number;
-    interface OrderInfo {
-        orderDetails(orderId: OrderIdType): void
+
+    type EmployeeType = number;
+
+    interface EmployeeBasic {
+        details(employeeId: EmployeeType): void
     }
 
-    interface OrderStatus {
-        orderStatus(orderId: OrderIdType): void
-        changeStatus(orderId: OrderIdType): void
+    interface EmployeeWork {
+        logWork(employeeId: EmployeeType): void
+        todayWork(employeeId: EmployeeType): void
     }
 
-    interface ProcessOrder {
-        processForDelivery(orderId: OrderIdType): void
+    interface EmployeeSalary {
+        processSalary(employeeId: EmployeeType): void
+        taxDeductionOnSalary(employeeId: EmployeeType): void
     }
 
-    class Order implements OrderInfo, OrderStatus, ProcessOrder {
-        orderDetails(orderId: OrderIdType) {
-            console.log(' order details for orderId : ' + orderId)
+    class Employee implements EmployeeBasic, EmployeeWork, EmployeeSalary {
+        details(employeeId: EmployeeType) {
+            console.log(' employee details for employeeId : ' + employeeId)
         }
 
-        orderStatus(orderId: OrderIdType): void {
-            console.log(' order status for orderId : ' + orderId)
+        logWork(employeeId: EmployeeType): void {
+            console.log(' employee log work for employeeId : ' + employeeId)
         }
 
-        changeStatus(orderId: OrderIdType): void {
-            console.log(' change order status for orderId : ' + orderId)
+        todayWork(employeeId: EmployeeType): void {
+            console.log(' employee work details for employeeId : ' + employeeId)
         }
 
-        processForDelivery(orderId: OrderIdType): void {
-            console.log('process order for delivery for orderId : ' + orderId)
+        processSalary(employeeId: EmployeeType): void {
+            console.log('process salary for  for employeeId : ' + employeeId)
+        }
+
+        taxDeductionOnSalary(employeeId: EmployeeType): void {
+            console.log('totdal Tax deduction on this month employeeId : ' + employeeId)
         }
 
     }
-    
-    const order = new Order();
-    order.orderDetails(1);
-    order.orderStatus(1);
-    order.changeStatus(1);
-    order.processForDelivery(1);
+
+    const employee = new Employee();
+    employee.details(1);
+    employee.logWork(1);
+    employee.todayWork(1);
+    employee.processSalary(1);
+    employee.taxDeductionOnSalary(1);
 
 }

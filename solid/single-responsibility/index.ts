@@ -1,38 +1,32 @@
 namespace SingleResponsibility {
-	type OrderType = number[];
+	type EmployeeId = number;
 
-	class OrderProcessor {
-		private orderItems: OrderType;
+	class Employee {
+		constructor(private employeeId: EmployeeId) { }
 
-		constructor(orderItems: OrderType) {
-			this.orderItems = orderItems;
-		}
-
-		confirm(): void {
-			console.log('Order confirmed for :', this.orderItems);
+		info(): void {
+			console.log('Employee Info for empID :', this.employeeId);
 		}
 	}
 
-	class DeliveryOrder {
-		changeStatus(orderItems: OrderType): void {
-			console.log('delivery status changing for :', orderItems);
+	class EmployeeWork {
+		dailyWorkLog(employeeId: EmployeeId): void {
+			console.log('today employee work log :', employeeId);
 		}
 	}
 
-	class InvoiceGenerator {
-		generateInvoice(orderItems: OrderType): void {
+	class EmployeeGrowth {
+		progressReport(orderItems: EmployeeId): void {
 			console.log('Invoice generated for:', orderItems);
 		}
 	}
 
-	const orderItems = [1, 2, 3];
+	const orderProcessor = new Employee(1);
+	orderProcessor.info();
 
-	const orderProcessor = new OrderProcessor(orderItems);
-	orderProcessor.confirm();
+	const deliveryOrder = new EmployeeWork();
+	deliveryOrder.dailyWorkLog(1);
 
-	const deliveryOrder = new DeliveryOrder();
-	deliveryOrder.changeStatus(orderItems);
-
-	const invoiceGenerator = new InvoiceGenerator();
-	invoiceGenerator.generateInvoice(orderItems);
+	const invoiceGenerator = new EmployeeGrowth();
+	invoiceGenerator.progressReport(1);
 }

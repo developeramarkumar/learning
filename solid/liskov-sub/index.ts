@@ -1,32 +1,32 @@
 namespace LiskovSubstitution {
-    type OrderType = number;
-    class Delivery {
-        parcelDetail(orderId: OrderType): void {
-            console.log('Parcel detail for orderid : ' + orderId)
+
+    type EmployeeType = number;
+
+    class Employee {
+        detail(employeeId: EmployeeType): void {
+            console.log('Employee details for employeeId : ' + employeeId)
         }
     }
 
-    class SurfaceDelivery extends Delivery {
-        transportDetail(orderId: OrderType): void {
-            // transport type, number route
-            console.log('transport detail for orderid: ' + orderId)
+    class ParmanentEmployee extends Employee {
+        getDepartment(employeeId: EmployeeType): void {
+            console.log('current department info for employeeId ' + employeeId)
         }
     }
 
-    class AirDelivery extends Delivery {
-        fligthDetail(orderId: OrderType): void {
-            // flight number
-            console.log('flight detail for orderid: ' + orderId)
+    class ContractualEmployee extends Employee {
+        getContractDuration(employeeId: EmployeeType): void {
+            console.log('contract duration for employeeId: ' + employeeId)
         }
     }
 
-    const airDelivery = new AirDelivery();
-    airDelivery.parcelDetail(1);
-    airDelivery.fligthDetail(1);
+    const parmanentEmployee = new ParmanentEmployee();
+    parmanentEmployee.detail(1);
+    parmanentEmployee.getDepartment(1);
 
-    const surfaceDelivery = new SurfaceDelivery();
-    surfaceDelivery.parcelDetail(1);
-    surfaceDelivery.transportDetail(1);
+    const tempEmployee = new ContractualEmployee();
+    tempEmployee.detail(1);
+    tempEmployee.getContractDuration(1);
 
 
 }

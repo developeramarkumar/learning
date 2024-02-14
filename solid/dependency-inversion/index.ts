@@ -1,54 +1,38 @@
 namespace DependencyInversion {
-    type OrderIdType = number;
-    type FileSystemInterface = {
-        readFile(path: string): string,
-        writeFile(path: string, data: string): string
-    }
-    interface StorageInterface {
-        read(path: string): string
-        write(path: string, data: string): string
-    }
 
-    class Storage implements StorageInterface {
-        constructor(private fileSystem: FileSystemInterface) { }
-        read(path: string): string {
-            return this.fileSystem.readFile(path)
-        }
+    type EmployeeType = number;
 
-        write(path: string, data: string): string {
-            return this.fileSystem.writeFile(path, data)
+    interface EmployeeInterface {
+        detail(employeeId: EmployeeType): void
+    }
+    class Employee implements EmployeeInterface {
+        detail(employeeId: EmployeeType): void {
+            console.log('Employee details for employeeId : ' + employeeId)
         }
     }
 
-    class LocalFileSystem implements FileSystemInterface {
-        readFile(path: string): string {
-            return 'localTestData'
-        }
+    class ParmanentEmployee {
+        constructor(private employee: EmployeeInterface) { }
 
-        writeFile(path: string, data: string): string {
-            return 'local-stored-relative-file-path'
-        }
-    }
-
-    class CloudFileSystem implements FileSystemInterface {
-        readFile(path: string): string {
-            return 'cloudTestData'
-        }
-
-        writeFile(path: string, data: string): string {
-            return 'cloud-stored-relative-file-path'
+        getDepartment(employeeId: EmployeeType): void {
+            this.employee.detail(employeeId);
+            console.log('current department info for employeeId ' + employeeId)
         }
     }
 
-    const localFileSystem = new LocalFileSystem();
-    const cloudFileSystem = new CloudFileSystem();
+    class ContractualEmployee {
+        constructor(private employee: EmployeeInterface) { }
 
-    const localStorage = new Storage(localFileSystem);
-    const cloudStorage = new Storage(cloudFileSystem);
+        getContractDuration(employeeId: EmployeeType): void {
+            this.employee.detail(employeeId);
+            console.log('contract duration for employeeId: ' + employeeId)
+        }
+    }
+    const employee = new Employee()
+    const parmanentEmployee = new ParmanentEmployee(employee);
+    parmanentEmployee.getDepartment(1);
 
-    console.log(localStorage.read('test-path'));
-    console.log(localStorage.write('test-path', 'data'));
-    console.log(cloudStorage.read('test-path'));
-    console.log(cloudStorage.write('test-path', 'data'));
+    const tempEmployee = new ContractualEmployee(employee);
+    tempEmployee.getContractDuration(1);
 
 }
